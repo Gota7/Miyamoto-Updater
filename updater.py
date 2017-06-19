@@ -5,10 +5,11 @@ import platform
 import getopt
 import zipfile
 import shutil
+import glob
 
 miyamotoUpdater_path = os.path.dirname(os.path.realpath(sys.argv[0])).replace("\\", "/")
 
-miyamoto_path = os.path.dirname(miyamotoUpdater_path)
+miyamoto_path = miyamotoUpdater_path
 
 def copytree(src, dst, symlinks=False, ignore=None):
     for item in os.listdir(src):
@@ -34,6 +35,33 @@ def main(argv):
     print("Done")
     print("Newest Version Is Version " + newVersionValues[1])
     os.remove(miyamotoUpdater_path + '/newestRelease.txt')
+
+    print("Making Temporary folders")
+    if not os.path.isdir(miyamoto_path+"/TEMP"):
+        os.mkdir(miyamoto_path+"/TEMP")
+        os.chdir(miyamoto_path+"/TEMP")
+        os.mkdir("src")
+        os.mkdir("release")
+        os.chdir(miyamoto_path)
+
+    if os.path.isdir(miyamoto_path+"/linuxTools"):
+            shutil.rmtree(miyamoto_path+"/linuxTools")
+    if os.path.isdir(miyamoto_path+"/Tools"):
+            shutil.rmtree(miyamoto_path+"/Tools")
+    if os.path.isdir(miyamoto_path+"/macTools"):
+            shutil.rmtree(miyamoto_path+"/macTools")
+    if os.path.isdir(miyamoto_path+"/miyamotodata"):
+            shutil.rmtree(miyamoto_path+"/miyamotodata")
+    if os.path.isdir(miyamoto_path+"/miyamotoextras"):
+            shutil.rmtree(miyamoto_path+"/miyamotoextras")
+    if os.path.isdir(miyamoto_path+"/miyamotoData"):
+            shutil.rmtree(miyamoto_path+"/miyamotoData")
+    if os.path.isdir(miyamoto_path+"/miyamotoExtras"):
+            shutil.rmtree(miyamoto_path+"/miyamotoExtras")
+    if os.path.isdir(miyamoto_path+"/__pycache__"):
+            shutil.rmtree(miyamoto_path+"/__pycache__")
+    if os.path.isdir(miyamoto_path+"/miyamotoextras"):
+            shutil.rmtree(miyamoto_path+"/miyamotoextras")
 
     #Get arguments.
     if "-r" in sys.argv:
@@ -98,6 +126,8 @@ def main(argv):
         print("Cleaning Up Junk Files")
         shutil.rmtree(src_files)
         os.remove(miyamotoUpdater_path + "/TEMP/src/src.zip")
+        if os.path.isdir(miyamoto_path+"/TEMP"):
+            shutil.rmtree(miyamoto_path+"/TEMP")
         print("Finished Cleaning")
 
         print("Miyamoto has been updated successfully! Restart Miyamoto to apply changes.")

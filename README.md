@@ -2,9 +2,10 @@
 An auto-updater for Miyamoto.
 
 ## Installation
-* Download latest release for your device.
-* Place the zip in the tools folder, relative to your operating system.
-* Extract the zip file, making sure the updater file and TEMP folder are located directly in the Tools, linuxTools, or macTools folder.
+* If you have Windows, download updater.exe
+* If you have Linux, download updater.elf
+* If you have Mac, download updater.py
+* Place the downloaded file in the same place as Miyamoto
 
 ## Usage
 * Miyamoto will check for updates, and execute the updater when needed.
